@@ -47,9 +47,7 @@ _message_after_copy: |
   外掛（已寫進 slide/index.html，只載入這些）：{{ plugins | join(", ") }}
 
   下一步（在產生出來的專案根目錄）：
-    python -m http.server 8000 --directory slide
-  或：
     docker compose up --build
 
   新增章節：建立 slide/<目錄>/rundown.md（給 agent 的說明）與 slide.md（實際投影片），
-  再把一個 section 加進 slide/index.html。沒有 index.md，也沒有產生器腳本。
+  再把一個 section 加進 slide/index.html。

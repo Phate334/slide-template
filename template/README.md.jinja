@@ -1,48 +1,22 @@
 # {{ project_name }}
 
-這是一份離線的 reveal.js 簡報，由 slide-template 產生。可以對外提供的檔案都在 `./slide`。
+離線的 reveal.js 簡報。放映的檔案都在 `./slide`。寫作規則見 [AGENTS.md](AGENTS.md)。
 
-寫作規則在 [AGENTS.md](AGENTS.md)。除非必要，投影片只用標準語意化 Markdown，外觀只改 `slide/style.css`。
-
-每一章有兩個檔：`rundown.md` 描述這一章給 AI agent 看（參考資料、展示流程或語氣），`slide.md` 才是 reveal.js 放映的投影片。
+`rundown.md` 描述這一章給 AI agent 看，不會放映；`slide.md` 才是投影片。
 
 ## 新增一章
 
-一章一個目錄，放 `rundown.md`（給 agent 的說明，不會放映）和 `slide.md`（實際投影片）。圖放在同一章，路徑要從 `slide/index.html` 算：
+一章一個目錄，裡面放 `rundown.md` 與 `slide.md`。圖放在同一章，路徑從 `slide/index.html` 算起。
 
 ```bash
 mkdir -p slide/02-topic
 ```
 
-```markdown
-# 下一章要講什麼
-
-給 agent 的流程或語氣寫在這裡。這份檔不會被放映。
-```
-
-```markdown
-# 下一章
-
-![示意](02-topic/figure.png)
-```
-
-上面第一段是 `rundown.md`，第二段是 `slide.md`。
-
-直接編輯 `slide/index.html`，照現有的 `01-welcome` 再加一個 section。section 的順序就是放映順序。沒有 `slide/index.md`，也沒有產生器腳本，不要另外去產生這個 HTML。
-
-水平換頁用單獨一行 `---`，直向子頁用單獨一行 `--`，講者備註用行首 `Note:`。
+然後編輯 `slide/index.html`，照 `01-welcome` 的 `<section>` 再加一筆。section 的順序就是放映順序。
 
 ## 預覽
 
-外部 Markdown 需要 HTTP，不要用 `file://` 直接開。
-
 在專案根目錄：
-
-```bash
-python -m http.server 8000 --directory slide
-```
-
-或用容器（`python:3.12-alpine`，只跑標準庫 `http.server`，公開 8000）：
 
 ```bash
 docker compose up --build
@@ -50,12 +24,4 @@ docker compose up --build
 
 瀏覽器開 <http://localhost:8000>。
 
-## 離線檔案
-
-`slide/vendor/` 是範本裡就有的靜態檔，複製專案時一起帶過來。`index.html` 只引用這裡的路徑，不走 CDN。版本與 sha256 寫在 `slide/vendor/VERSIONS.txt`。
-
-`slide/index.html` 的 `<script>` 與 `Reveal.initialize({ plugins })` 決定載入哪些外掛（建立專案時用 Copier 勾選，只會寫入勾到的；`markdown` 一定有）。章節順序就是那些 `<section data-markdown>` 的順序。瀏覽器不會再選外掛。之後要改，直接改這個 HTML。
-
-這份專案目前的外掛：{% for plugin in ["markdown", "highlight", "notes", "math", "search", "zoom", "chalkboard", "appearance"] if plugin in plugins %}`{{ plugin }}`{% if not loop.last %}、{% endif %}{% endfor %}。
-
-官方 reveal.js 6 內建且已打包的 id：`markdown`、`highlight`、`notes`、`math`（本機 KaTeX）、`search`、`zoom`。`chalkboard` 不是官方內建，是範本另外打包的螢光筆／黑板（按 `C` 畫、按 `B` 開黑板）。`appearance` 也不是官方內建，是 Martinomagnifico/reveal.js-appearance，讓元素依序進場；沒勾就不會載入。沒寫進 `index.html` 就不會載入；`search.js`、`zoom.js` 與 `vendor/appearance/` 仍在 `vendor/`，要啟用就自己把對應的 script 與 plugin 加回 `index.html`。
+外掛在建立專案時寫進 `slide/index.html`（目前：{% for plugin in ["markdown", "highlight", "notes", "math", "search", "zoom", "chalkboard", "appearance"] if plugin in plugins %}`{{ plugin }}`{% if not loop.last %}、{% endif %}{% endfor %}）。要改就直接改這個檔。

@@ -1,6 +1,6 @@
 # 簡報寫作規則
 
-這份專案是一份 reveal.js 簡報。可以對外提供的檔案都在 `./slide`，用 `python -m http.server` 就能看。
+這份專案是一份 reveal.js 簡報。可以對外提供的檔案都在 `./slide`。預覽請在專案根目錄執行 `docker compose up --build`，瀏覽器開 http://localhost:8000。
 
 ## 必須遵守
 
