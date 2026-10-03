@@ -1,0 +1,58 @@
+{#
+  外掛順序固定。只輸出 copier 問答勾選的項目（markdown 由 validator 保證在內）。
+  沒有產生器腳本，這個檔在 copy 時一次渲染完。
+#}
+{%- set catalog = [
+  {"id": "markdown", "script": "vendor/reveal.js/dist/plugin/markdown.js", "style": "", "expr": "RevealMarkdown"},
+  {"id": "highlight", "script": "vendor/reveal.js/dist/plugin/highlight.js", "style": "vendor/reveal.js/dist/plugin/highlight/monokai.css", "expr": "RevealHighlight"},
+  {"id": "notes", "script": "vendor/reveal.js/dist/plugin/notes.js", "style": "", "expr": "RevealNotes"},
+  {"id": "math", "script": "vendor/reveal.js/dist/plugin/math.js", "style": "", "expr": "RevealMath.KaTeX"},
+  {"id": "search", "script": "vendor/reveal.js/dist/plugin/search.js", "style": "", "expr": "RevealSearch"},
+  {"id": "zoom", "script": "vendor/reveal.js/dist/plugin/zoom.js", "style": "", "expr": "RevealZoom"},
+  {"id": "chalkboard", "script": "vendor/chalkboard/plugin.js", "style": "vendor/chalkboard/style.css", "expr": "RevealChalkboard"},
+] -%}
+{%- set chosen = catalog | selectattr("id", "in", plugins) | list -%}
+<!--
+這個檔就是放映入口。沒有 slide/index.md，也沒有產生器腳本。
+要加一章，直接改這個檔：在 slide/ 底下建好章節目錄（內含 slide.md 與 rundown.md）後，
+照下面 01-welcome 的 section 再加一筆。section 的順序就是放映順序。
+要增減外掛，改對應的 link、script，以及底下 Reveal.initialize 的 plugins。
+-->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ project_name | e }}</title>
+{%- if author %}
+  <meta name="author" content="{{ author | e }}">
+{%- endif %}
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
+{%- for plugin in chosen if plugin.style %}
+  <link rel="stylesheet" href="{{ plugin.style }}">
+{%- endfor %}
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown="01-welcome/slide.md" data-separator="\r?\n---\r?\n" data-separator-vertical="\r?\n--\r?\n" data-separator-notes="^\s*notes?:" data-charset="utf-8"></section>
+    </div>
+  </div>
+  <script src="vendor/reveal.js/dist/reveal.js"></script>
+{%- for plugin in chosen %}
+  <script src="{{ plugin.script }}"></script>
+{%- endfor %}
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+{%- if "math" in plugins %}
+      katex: { local: "vendor/katex" },
+{%- endif %}
+      plugins: [{{ chosen | map(attribute="expr") | join(", ") }}]
+    });
+  </script>
+</body>
+</html>
