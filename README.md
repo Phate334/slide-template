@@ -50,7 +50,7 @@ CLI 會問三件事。外掛那題是複選（空白鍵勾選，Enter 確認）�
 | zoom — 官方內建，Alt 加點擊放大 | `zoom` | 關 |
 | chalkboard — 打包的螢光筆額外外掛（非官方內建） | `chalkboard` | 開 |
 
-官方內建是 reveal.js 6.0.1 `dist/plugin/` 裡這份範本附上的那幾個。`chalkboard` 不是官方內建，檔案在 `vendor/chalkboard/plugin.js`。勾了什麼，`slide/index.html` 就只載入什麼（`markdown` 一定有）。這是複製時用 Jinja 寫好的靜態頁，沒有執行期選單，也沒有產生器腳本。
+官方內建是 reveal.js 6.0.2 `dist/plugin/` 裡這份範本附上的那幾個。`chalkboard` 不是官方內建，檔案在 `vendor/chalkboard/plugin.js`。勾了什麼，`slide/index.html` 就只載入什麼（`markdown` 一定有）。這是複製時用 Jinja 寫好的靜態頁，沒有執行期選單，也沒有產生器腳本。
 
 不開問答、沿用預設：
 
@@ -158,7 +158,7 @@ docker compose up --build
 
 | 套件 | 版本 | 放到 |
 | --- | --- | --- |
-| [hakimel/reveal.js](https://github.com/hakimel/reveal.js/releases/tag/6.0.1) | 6.0.1 | `slide/vendor/reveal.js/dist/` |
+| [hakimel/reveal.js](https://github.com/hakimel/reveal.js/releases/tag/6.0.2) | 6.0.2 | `slide/vendor/reveal.js/dist/` |
 | [KaTeX](https://github.com/KaTeX/KaTeX) | 0.19.0 | `slide/vendor/katex/dist/` |
 | [rajgoel/reveal.js-plugins](https://github.com/rajgoel/reveal.js-plugins/releases/tag/4.6.0) 的 chalkboard | 4.6.0（plugin.js 標頭為 2.3.3） | `slide/vendor/chalkboard/` |
 

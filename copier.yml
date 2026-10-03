@@ -18,7 +18,7 @@ author:
   help: 作者。可以留空。
   default: ""
 
-# 官方 reveal.js 6.0.1 dist/plugin 已打包的內建外掛，加上範本另外附上的 chalkboard。
+# 官方 reveal.js 6.0.2 dist/plugin 已打包的內建外掛，加上範本另外附上的 chalkboard。
 # 答案是外掛 id 的清單。複製時只把勾選的項目寫進 slide/index.html，沒有執行期選單。
 plugins:
   type: str
