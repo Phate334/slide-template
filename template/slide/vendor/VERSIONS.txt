@@ -12,7 +12,13 @@ reveal.js-plugins 4.6.0
 https://github.com/rajgoel/reveal.js-plugins/archive/refs/tags/4.6.0.tar.gz
 sha256 6d2a6888bbf3190dd24196b146f777aa3421e4439f327b891891bcc9f7fa7d72
 
+reveal.js-appearance 1.4.1
+https://github.com/Martinomagnifico/reveal.js-appearance/archive/refs/tags/v1.4.1.tar.gz
+sha256 c134ba7d877b562f1375d25928082b97665a0ec469bcd435ecf5ac9a788bb834
+
 reveal.js 6 的外掛在 dist/plugin/。
 math 用 RevealMath.KaTeX，katex.local 指向 vendor/katex。
 chalkboard 來自 rajgoel/reveal.js-plugins 4.6.0。
-search.js 與 zoom.js 也在 vendor 裡；沒在 index.html 載入就不會啟用。
+appearance 來自 Martinomagnifico/reveal.js-appearance 1.4.1（官方說明已對應最新 reveal.js；全域物件 Appearance）。
+樣式在 vendor/appearance/appearance.css，腳本會偵測 --cssimported-appearance 而不再自己抓 CSS。
+search.js、zoom.js 與 appearance 也在 vendor 裡；沒在 index.html 載入就不會啟用。

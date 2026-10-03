@@ -24,19 +24,20 @@ plugins:
   type: str
   multiselect: true
   help: |
-    要載入哪些外掛（可複選）。slide/index.html 只會放你勾的那些 script。
+    要載入哪些外掛（可複選）。每一項後面都有一句說明。slide/index.html 只會放你勾的那些 script。
     markdown 必須保留，slide.md 靠它載入；沒勾的話這裡會要求你補上。
-    預設打開：markdown、highlight（程式碼高亮）、notes（講者備註）、math（KaTeX）、chalkboard（螢光筆）。
-    search、zoom 在清單裡，預設關閉。
-    chalkboard 不是 reveal.js 官方內建，是這個範本另外打包的螢光筆／黑板外掛。
+    預設打開：markdown、highlight、notes、math、chalkboard。
+    search、zoom、appearance 在清單裡，預設關閉。
+    chalkboard 與 appearance 不是 reveal.js 官方內建，是這個範本另外打包的。
   choices:
-    "markdown — 官方內建，必要（載入 slide.md）": markdown
-    "highlight — 官方內建，程式碼高亮": highlight
-    "notes — 官方內建，講者備註": notes
-    "math — 官方內建，KaTeX 數學": math
-    "search — 官方內建，投影片搜尋": search
-    "zoom — 官方內建，Alt 加點擊放大": zoom
-    "chalkboard — 打包的螢光筆額外外掛（非官方內建）": chalkboard
+    "markdown — 官方內建，把各章 slide.md 載進來當投影片，一定要留著。": markdown
+    "highlight — 官方內建，替程式碼區塊加上語法高亮。": highlight
+    "notes — 官方內建，放映時按 S 打開講者備註視窗。": notes
+    "math — 官方內建，用本機 KaTeX 顯示數學式，不走 CDN。": math
+    "search — 官方內建，放映時可以搜尋投影片上的文字。": search
+    "zoom — 官方內建，按住 Alt 再點擊就能放大投影片。": zoom
+    "chalkboard — 額外打包的外掛，按 C 在投影片上畫、按 B 開黑板。": chalkboard
+    "appearance — 社群外掛，讓元素依序進場，像簡報軟體的動畫。": appearance
   default:
     - markdown
     - highlight

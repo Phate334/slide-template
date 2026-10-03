@@ -10,6 +10,7 @@
   {"id": "search", "script": "vendor/reveal.js/dist/plugin/search.js", "style": "", "expr": "RevealSearch"},
   {"id": "zoom", "script": "vendor/reveal.js/dist/plugin/zoom.js", "style": "", "expr": "RevealZoom"},
   {"id": "chalkboard", "script": "vendor/chalkboard/plugin.js", "style": "vendor/chalkboard/style.css", "expr": "RevealChalkboard"},
+  {"id": "appearance", "script": "vendor/appearance/appearance.js", "style": "vendor/appearance/appearance.css", "expr": "Appearance"},
 ] -%}
 {%- set chosen = catalog | selectattr("id", "in", plugins) | list -%}
 <!--

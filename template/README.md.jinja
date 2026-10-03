@@ -60,6 +60,6 @@ docker compose up --build
 
 `slide/index.html` 的 `<script>` 與 `Reveal.initialize({ plugins })` 決定載入哪些外掛（建立專案時用 Copier 勾選，只會寫入勾到的；`markdown` 一定有）。章節順序就是那些 `<section data-markdown>` 的順序。瀏覽器不會再選外掛。之後要改，直接改這個 HTML。
 
-這份專案目前的外掛：{% for plugin in ["markdown", "highlight", "notes", "math", "search", "zoom", "chalkboard"] if plugin in plugins %}`{{ plugin }}`{% if not loop.last %}、{% endif %}{% endfor %}。
+這份專案目前的外掛：{% for plugin in ["markdown", "highlight", "notes", "math", "search", "zoom", "chalkboard", "appearance"] if plugin in plugins %}`{{ plugin }}`{% if not loop.last %}、{% endif %}{% endfor %}。
 
-官方 reveal.js 6 內建且已打包的 id：`markdown`、`highlight`、`notes`、`math`（本機 KaTeX）、`search`、`zoom`。`chalkboard` 不是官方內建，是範本另外打包的螢光筆／黑板（按 `C` 畫、按 `B` 開黑板）。沒寫進 `index.html` 就不會載入；`search.js` 與 `zoom.js` 仍在 `vendor/`，要啟用就自己把對應的 script 與 plugin 加回 `index.html`。
+官方 reveal.js 6 內建且已打包的 id：`markdown`、`highlight`、`notes`、`math`（本機 KaTeX）、`search`、`zoom`。`chalkboard` 不是官方內建，是範本另外打包的螢光筆／黑板（按 `C` 畫、按 `B` 開黑板）。`appearance` 也不是官方內建，是 Martinomagnifico/reveal.js-appearance，讓元素依序進場；沒勾就不會載入。沒寫進 `index.html` 就不會載入；`search.js`、`zoom.js` 與 `vendor/appearance/` 仍在 `vendor/`，要啟用就自己把對應的 script 與 plugin 加回 `index.html`。

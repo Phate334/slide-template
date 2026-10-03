@@ -36,21 +36,22 @@ CLI 會問三件事。外掛那題是複選（空白鍵勾選，Enter 確認）�
 | --- | --- | --- |
 | `project_name` | `slide-template` | 簡報標題，會出現在投影片、瀏覽器分頁與 README |
 | `author` | 空 | 作者，直接按 Enter 留空即可 |
-| `plugins` | `markdown`、`highlight`、`notes`、`math`、`chalkboard` | 要寫進 `slide/index.html` 的外掛。`search`、`zoom` 在清單裡但預設不勾。`markdown` 必填 |
+| `plugins` | `markdown`、`highlight`、`notes`、`math`、`chalkboard` | 要寫進 `slide/index.html` 的外掛。每一項都有一句說明。`search`、`zoom`、`appearance` 在清單裡但預設不勾。`markdown` 必填 |
 
 `plugins` 的選項與寫進專案的 id：
 
 | 畫面上的選項 | 答案 id | 預設 |
 | --- | --- | --- |
-| markdown — 官方內建，必要（載入 slide.md） | `markdown` | 開，且不能拿掉 |
-| highlight — 官方內建，程式碼高亮 | `highlight` | 開 |
-| notes — 官方內建，講者備註 | `notes` | 開 |
-| math — 官方內建，KaTeX 數學 | `math` | 開 |
-| search — 官方內建，投影片搜尋 | `search` | 關 |
-| zoom — 官方內建，Alt 加點擊放大 | `zoom` | 關 |
-| chalkboard — 打包的螢光筆額外外掛（非官方內建） | `chalkboard` | 開 |
+| markdown — 官方內建，把各章 slide.md 載進來當投影片，一定要留著。 | `markdown` | 開，且不能拿掉 |
+| highlight — 官方內建，替程式碼區塊加上語法高亮。 | `highlight` | 開 |
+| notes — 官方內建，放映時按 S 打開講者備註視窗。 | `notes` | 開 |
+| math — 官方內建，用本機 KaTeX 顯示數學式，不走 CDN。 | `math` | 開 |
+| search — 官方內建，放映時可以搜尋投影片上的文字。 | `search` | 關 |
+| zoom — 官方內建，按住 Alt 再點擊就能放大投影片。 | `zoom` | 關 |
+| chalkboard — 額外打包的外掛，按 C 在投影片上畫、按 B 開黑板。 | `chalkboard` | 開 |
+| appearance — 社群外掛，讓元素依序進場，像簡報軟體的動畫。 | `appearance` | 關 |
 
-官方內建是 reveal.js 6.0.2 `dist/plugin/` 裡這份範本附上的那幾個。`chalkboard` 不是官方內建，檔案在 `vendor/chalkboard/plugin.js`。勾了什麼，`slide/index.html` 就只載入什麼（`markdown` 一定有）。這是複製時用 Jinja 寫好的靜態頁，沒有執行期選單，也沒有產生器腳本。
+官方內建是 reveal.js 6.0.2 `dist/plugin/` 裡這份範本附上的那幾個。`chalkboard` 不是官方內建，檔案在 `vendor/chalkboard/plugin.js`。`appearance` 也不是官方內建，檔案在 `vendor/appearance/`（Martinomagnifico/reveal.js-appearance 1.4.1）。勾了什麼，`slide/index.html` 就只載入什麼（`markdown` 一定有）。這是複製時用 Jinja 寫好的靜態頁，沒有執行期選單，也沒有產生器腳本。
 
 不開問答、沿用預設：
 
@@ -161,8 +162,9 @@ docker compose up --build
 | [hakimel/reveal.js](https://github.com/hakimel/reveal.js/releases/tag/6.0.2) | 6.0.2 | `slide/vendor/reveal.js/dist/` |
 | [KaTeX](https://github.com/KaTeX/KaTeX) | 0.19.0 | `slide/vendor/katex/dist/` |
 | [rajgoel/reveal.js-plugins](https://github.com/rajgoel/reveal.js-plugins/releases/tag/4.6.0) 的 chalkboard | 4.6.0（plugin.js 標頭為 2.3.3） | `slide/vendor/chalkboard/` |
+| [Martinomagnifico/reveal.js-appearance](https://github.com/Martinomagnifico/reveal.js-appearance/releases/tag/v1.4.1) | 1.4.1 | `slide/vendor/appearance/` |
 
-建立專案時可勾的 id（預設會寫進 `index.html` 的是 markdown、highlight、notes、math、chalkboard；search 與 zoom 要另外勾，或事後自己改 HTML）：
+建立專案時可勾的 id（預設會寫進 `index.html` 的是 markdown、highlight、notes、math、chalkboard；search、zoom 與 appearance 要另外勾，或事後自己改 HTML）：
 
 | id | 全域物件 | 本機腳本 |
 | --- | --- | --- |
@@ -173,6 +175,7 @@ docker compose up --build
 | `search` | `RevealSearch` | `vendor/reveal.js/dist/plugin/search.js` |
 | `zoom` | `RevealZoom` | `vendor/reveal.js/dist/plugin/zoom.js` |
 | `chalkboard` | `RevealChalkboard` | `vendor/chalkboard/plugin.js` 與 `vendor/chalkboard/style.css`（打包的螢光筆額外外掛，不是官方內建） |
+| `appearance` | `Appearance` | `vendor/appearance/appearance.js` 與 `vendor/appearance/appearance.css`（社群外掛，元素依序進場，預設不載入） |
 
 `math` 用的是 KaTeX，不是會向 CDN 要檔案的 MathJax。reveal.js 6 的數學外掛在沒有 `katex.local` 時會去 jsDelivr；勾了 `math` 時，`index.html` 會帶上 `local: "vendor/katex"`，所以初始化不會走那條路。
 
@@ -184,7 +187,7 @@ docker compose up --build
 
 複製時 Jinja 只把勾選的外掛寫進 `slide/index.html`：
 
-- `<link>` 與 `<script>` 的順序是 markdown、highlight、notes、math、search、zoom、chalkboard，沒勾的不會出現。必須包含 `markdown`。
+- `<link>` 與 `<script>` 的順序是 markdown、highlight、notes、math、search、zoom、chalkboard、appearance，沒勾的不會出現。必須包含 `markdown`。勾了 `appearance` 才會載入本機 `vendor/appearance/`，不走 CDN，也不需要額外的 Reveal 設定。
 - `Reveal.initialize({ plugins })` 用同一份清單。勾了 `math` 才會有 `katex: { local: "vendor/katex" }`。
 - 預設章節只有 `01-welcome`，對應一個 `<section data-markdown="01-welcome/slide.md" ...>`。之後加章就再加 section。
 - `rundown.md` 給 agent 看，不會被放映。
@@ -193,4 +196,4 @@ docker compose up --build
 
 ## 授權
 
-範本本身可以隨專案使用。reveal.js、KaTeX、chalkboard 各有自己的 MIT 授權，放在 `slide/vendor/`。
+範本本身可以隨專案使用。reveal.js、KaTeX、chalkboard、appearance（含打包的 Animate.css）各有自己的 MIT 授權，放在 `slide/vendor/`。
