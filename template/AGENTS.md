@@ -20,7 +20,7 @@
 每一章是 `slide/<章節>/`。這一章有兩個 Markdown，用途不同：
 
 - `rundown.md` 用來描述這一章，讓 AI agent 了解這段簡報在講什麼。可以寫要參考的資訊、簡報展示流程，或語氣與風格。它不會被 reveal.js 放映。
-- `slide.md` 才是要編輯或生成、給 reveal.js 展示的實際投影片內容。`index.html` 只載入這個檔。
+- `slide.md` 才是要編輯或產生、給 reveal.js 展示的實際投影片內容。`index.html` 只載入這個檔。
 
 除非必要，`slide.md` 只用標準語意化 Markdown，外觀只改簡報根目錄的 `slide/style.css`（見上面「必須遵守」）。
 
