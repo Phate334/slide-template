@@ -35,7 +35,6 @@ CLI 會問三件事。外掛那題是複選（空白鍵勾選，Enter 確認）�
 | 問題 | 預設 | 用途 |
 | --- | --- | --- |
 | `project_name` | `slide-template` | 簡報標題，會出現在投影片、瀏覽器分頁與 README |
-| `author` | 空 | 作者，直接按 Enter 留空即可 |
 | `plugins` | `markdown`、`highlight`、`notes`、`math`、`chalkboard` | 要寫進 `slide/index.html` 的外掛。每一項都有一句說明。`search`、`zoom`、`appearance` 在清單裡但預設不勾。`markdown` 必填 |
 
 `plugins` 的選項與寫進專案的 id：
@@ -64,7 +63,6 @@ copier copy --defaults /path/to/slide-template ./my-deck
 ```bash
 copier copy --defaults \
   --data project_name='我的簡報' \
-  --data author='你的名字' \
   --data 'plugins=[markdown, highlight, notes, math, chalkboard]' \
   /path/to/slide-template ./my-deck
 ```
@@ -192,7 +190,7 @@ docker compose up --build
 - 預設章節只有 `01-welcome`，對應一個 `<section data-markdown="01-welcome/slide.md" ...>`。之後加章就再加 section。
 - `rundown.md` 給 agent 看，不會被放映。
 
-第一個出現在標題的是建立專案時的 `project_name`。有填作者時會多一行 author meta。
+標題顯示的是建立專案時的 `project_name`。
 
 ## 授權
 

@@ -25,9 +25,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ project_name | e }}</title>
-{%- if author %}
-  <meta name="author" content="{{ author | e }}">
-{%- endif %}
   <link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
   <link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
 {%- for plugin in chosen if plugin.style %}
