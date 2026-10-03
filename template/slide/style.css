@@ -1,0 +1,131 @@
+/* 簡報的視覺層。投影片請維持語意化 Markdown，不要為了樣式加 class。 */
+
+:root {
+  --ink: #1c1917;
+  --muted: #57534e;
+  --paper: #f7f4ef;
+  --accent: #9a3412;
+  --mark: #ffe56b;
+  --rule: #e7e5e4;
+}
+
+.reveal-viewport,
+.reveal {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.reveal {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Source Han Sans TC", sans-serif;
+  font-size: 32px;
+}
+
+.reveal .slides section {
+  line-height: 1.55;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.reveal h1 { font-size: 1.8em; }
+.reveal h2 { font-size: 1.35em; color: var(--accent); }
+.reveal h3 { font-size: 1.1em; }
+
+.reveal p,
+.reveal li {
+  font-size: 0.85em;
+}
+
+.reveal a {
+  color: var(--accent);
+}
+
+.reveal mark {
+  background: var(--mark);
+  color: inherit;
+  padding: 0.05em 0.2em;
+  border-radius: 0.15em;
+}
+
+.reveal kbd {
+  font-family: ui-monospace, "Sarasa Mono TC", monospace;
+  font-size: 0.8em;
+  border: 1px solid #d6d3d1;
+  border-bottom-width: 2px;
+  border-radius: 0.3em;
+  padding: 0.05em 0.4em;
+  background: #fff;
+}
+
+.reveal blockquote {
+  background: transparent;
+  box-shadow: none;
+  border-left: 4px solid var(--accent);
+  padding: 0.2em 0 0.2em 0.9em;
+  margin: 0.8em 0;
+  color: var(--muted);
+  font-style: normal;
+  width: 100%;
+}
+
+.reveal :not(pre) > code {
+  font-family: ui-monospace, "Sarasa Mono TC", "Noto Sans Mono CJK TC", monospace;
+  background: #fff;
+  padding: 0.05em 0.3em;
+  border-radius: 0.2em;
+}
+
+.reveal pre {
+  width: 100%;
+  margin: 0.6em 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.reveal pre code {
+  font-family: ui-monospace, "Sarasa Mono TC", "Noto Sans Mono CJK TC", monospace;
+  border-radius: 0.4em;
+  max-height: 60vh;
+  padding: 0.8em 1em;
+}
+
+.reveal table {
+  margin: 0.6em 0;
+  font-size: 0.75em;
+  border-collapse: collapse;
+}
+
+.reveal table th,
+.reveal table td {
+  border: 1px solid var(--rule);
+  padding: 0.35em 0.7em;
+}
+
+.reveal table th {
+  background: #fff;
+  font-weight: 700;
+}
+
+.reveal section img {
+  max-width: 100%;
+  max-height: 42vh;
+  margin: 0.4em 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.reveal .slide-number {
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+}

@@ -1,0 +1,63 @@
+# {{ project_name }}{% if author %}
+
+{{ author }}
+{% endif %}
+
+這一章示範怎麼用語意化 Markdown 寫投影片。外觀在 `slide/style.css`，不要為了排版加 class。
+
+- 一章一個目錄，內容檔固定叫 `slide.md`
+- 圖與其他靜態檔放在同一章
+- 圖片路徑相對於 `slide/index.html`
+
+![放在本章目錄的圖](01-welcome/diagram.svg)
+
+---
+
+## 程式碼高亮
+
+```python
+def greet(name: str) -> str:
+    return f"你好，{name}"
+```
+
+Note:
+講者備註。放映時按 S 開筆記視窗。這段不會出現在投影片上。
+
+---
+
+## 螢光筆
+
+語意上的重點用 <mark>mark</mark>，顏色由 `style.css` 決定。
+
+放映時也可以直接畫：按 <kbd>C</kbd> 用螢光筆在這一頁上寫，按 <kbd>B</kbd> 打開黑板。再按一次就關掉。
+
+---
+
+## 數學
+
+一行裡的公式 $a^2 + b^2 = c^2$，以及獨立的一行：
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+---
+
+## 直向子頁
+
+這是同一章裡用單獨一行 `--` 切出來的直向投影片。
+
+--
+
+### 還在這一章
+
+表格也是普通 Markdown。
+
+| 檔案 | 用途 |
+| --- | --- |
+| `rundown.md` | 給 AI agent 的本章說明，不會放映 |
+| `slide.md` | 這一章實際投影片 |
+| `index.html` | 章節順序與外掛，直接改這個檔 |
+| `style.css` | 外觀 |
+
+> 引用區塊用來標一段旁白，不是拿來當標題樣式。

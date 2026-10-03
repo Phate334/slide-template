@@ -1,0 +1,59 @@
+# slide-template：離線 reveal.js 簡報的 Copier 範本。
+# 問答的答案會寫進產生專案的 .copier-answers.yml。
+# 沒有 _tasks。vendor 是範本裡的靜態檔，index.html 在複製時用 Jinja 寫好。
+_min_copier_version: "9.0.0"
+_subdirectory: template
+_exclude:
+  - "**/__pycache__/**"
+  - "**/*.py[co]"
+
+
+project_name:
+  type: str
+  help: 簡報標題。會出現在投影片、瀏覽器分頁與 README。
+  default: slide-template
+
+author:
+  type: str
+  help: 作者。可以留空。
+  default: ""
+
+# 官方 reveal.js 6.0.1 dist/plugin 已打包的內建外掛，加上範本另外附上的 chalkboard。
+# 答案是外掛 id 的清單。複製時只把勾選的項目寫進 slide/index.html，沒有執行期選單。
+plugins:
+  type: str
+  multiselect: true
+  help: |
+    要載入哪些外掛（可複選）。slide/index.html 只會放你勾的那些 script。
+    markdown 必須保留，slide.md 靠它載入；沒勾的話這裡會要求你補上。
+    預設打開：markdown、highlight（程式碼高亮）、notes（講者備註）、math（KaTeX）、chalkboard（螢光筆）。
+    search、zoom 在清單裡，預設關閉。
+    chalkboard 不是 reveal.js 官方內建，是這個範本另外打包的螢光筆／黑板外掛。
+  choices:
+    "markdown — 官方內建，必要（載入 slide.md）": markdown
+    "highlight — 官方內建，程式碼高亮": highlight
+    "notes — 官方內建，講者備註": notes
+    "math — 官方內建，KaTeX 數學": math
+    "search — 官方內建，投影片搜尋": search
+    "zoom — 官方內建，Alt 加點擊放大": zoom
+    "chalkboard — 打包的螢光筆額外外掛（非官方內建）": chalkboard
+  default:
+    - markdown
+    - highlight
+    - notes
+    - math
+    - chalkboard
+  validator: "{% if 'markdown' not in plugins %}必須包含 markdown，否則 slide.md 不會被載入。{% endif %}"
+
+_message_after_copy: |
+  已產生「{{ project_name }}」。
+
+  外掛（已寫進 slide/index.html，只載入這些）：{{ plugins | join(", ") }}
+
+  下一步（在產生出來的專案根目錄）：
+    python -m http.server 8000 --directory slide
+  或：
+    docker compose up --build
+
+  新增章節：建立 slide/<目錄>/rundown.md（給 agent 的說明）與 slide.md（實際投影片），
+  再把一個 section 加進 slide/index.html。沒有 index.md，也沒有產生器腳本。

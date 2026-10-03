@@ -1,0 +1,8 @@
+# 在產生出來的專案根目錄執行：docker compose up --build
+# 瀏覽器開 http://localhost:8000
+services:
+  slides:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
