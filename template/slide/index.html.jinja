@@ -1,9 +1,7 @@
 {#
-  外掛順序固定。只輸出 copier 問答勾選的項目（markdown 由 validator 保證在內）。
-  沒有產生器腳本，這個檔在 copy 時一次渲染完。
+  markdown 固定載入。其餘外掛依 copier 問答勾選輸出。
 #}
 {%- set catalog = [
-  {"id": "markdown", "script": "vendor/reveal.js/dist/plugin/markdown.js", "style": "", "expr": "RevealMarkdown"},
   {"id": "highlight", "script": "vendor/reveal.js/dist/plugin/highlight.js", "style": "vendor/reveal.js/dist/plugin/highlight/monokai.css", "expr": "RevealHighlight"},
   {"id": "notes", "script": "vendor/reveal.js/dist/plugin/notes.js", "style": "", "expr": "RevealNotes"},
   {"id": "math", "script": "vendor/reveal.js/dist/plugin/math.js", "style": "", "expr": "RevealMath.KaTeX"},
@@ -39,6 +37,7 @@
     </div>
   </div>
   <script src="vendor/reveal.js/dist/reveal.js"></script>
+  <script src="vendor/reveal.js/dist/plugin/markdown.js"></script>
 {%- for plugin in chosen %}
   <script src="{{ plugin.script }}"></script>
 {%- endfor %}
@@ -49,7 +48,7 @@
 {%- if "math" in plugins %}
       katex: { local: "vendor/katex" },
 {%- endif %}
-      plugins: [{{ chosen | map(attribute="expr") | join(", ") }}]
+      plugins: [RevealMarkdown{% if chosen %}, {{ chosen | map(attribute="expr") | join(", ") }}{% endif %}]
     });
   </script>
 </body>

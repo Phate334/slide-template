@@ -28,7 +28,7 @@ copier copy https://github.com/Phate334/slide-template ./my-deck
 
 來源也可以是本機的範本目錄。`./my-deck` 必須是還沒存在的目錄，或是空目錄。
 
-會問兩題：簡報標題，以及要載入哪些外掛（空白鍵勾選，Enter 確認）。`markdown` 一定要留著。預設打開 markdown、highlight、notes、math、chalkboard。
+會問兩題：簡報標題，以及要載入哪些外掛（空白鍵勾選，Enter 確認）。只有勾選的外掛會複製進專案並寫進 `slide/index.html`；`markdown` 固定載入。預設打開 highlight、notes、math、chalkboard。
 
 不開問答、沿用預設：
 
